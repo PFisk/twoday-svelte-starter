@@ -1,15 +1,10 @@
 <script lang="ts">
-  import BreweryCard from "./BreweryCard.svelte";
-  import { Col, Container, Row, Card } from "sveltestrap";
+  import { Col, Container, Row } from "sveltestrap";
   import { getBreweries } from "./api/HttpClient";
-  import { onMount } from "svelte";
 
   let breweries: any[] = [];
 
-  onMount(async () => {
-    const data = await getBreweries().then((data) => data);
-    breweries = await data;
-  });
+  getBreweries().then((data) => breweries = data);
 </script>
 
 <main>
@@ -29,17 +24,6 @@
           >
         </p>
       </Col>
-    </Row>
-    <Row cols={3}>
-      {#each breweries as brewery}
-        <Col>
-          <BreweryCard {brewery} />
-        </Col>
-      {:else}
-        <Col>
-          <p>loading...</p>
-        </Col>
-      {/each}
     </Row>
   </Container>
 </main>
