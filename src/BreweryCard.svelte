@@ -8,6 +8,7 @@
     CardText,
     CardTitle,
   } from "sveltestrap";
+  
   export let brewery: any;
 </script>
 
