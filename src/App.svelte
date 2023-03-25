@@ -1,28 +1,35 @@
 <script lang="ts">
   import { Col, Container, Row } from "sveltestrap";
   import { getBreweries } from "./api/HttpClient";
+  import BreweryCard from "./BreweryCard.svelte";
 
   let breweries: any[] = [];
 
+    // define a sample brewery object
+    const testBrewery = {
+    Rom: "Sample Room",
+    Enhet: "Sample Unit",
+    Temperatur: "25°C",
+    Fuktighet: "60%",
+    Timestamp: "2023-03-25T09:00:00Z"
+  }
+
   getBreweries().then((data) => breweries = data);
+
 </script>
 
 <main>
   <Container>
     <Row>
       <Col>
-        <h1>Svelte + twoday</h1>
+        <h1>BeerLovers BeerPage 2.0</h1>
       </Col>
     </Row>
     <Row>
       <Col>
-        <p>
-          Check out <a
-            href="https://svelte.dev/tutorial"
-            target="_blank"
-            rel="noreferrer">the docs</a
-          >
-        </p>
+          {#each breweries as brewery}
+              <BreweryCard {brewery} />
+          {/each}
       </Col>
     </Row>
   </Container>
